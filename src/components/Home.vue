@@ -53,6 +53,17 @@
             <el-breadcrumb-item v-text="this.$router.currentRoute.name"></el-breadcrumb-item>
           </el-breadcrumb>
 
+          <div class="amap-page-container">
+            <div :style="{width:'100%',height:'540px'}">
+              <!--              <el-amap vid="amap" :plugin="plugin" class="amap-demo" :center="center">-->
+              <!--              </el-amap>-->
+              <!--              -->
+              <iframe src="./static/GaoDe.html" name="iframe_a" style="width:100%; height:100%"></iframe>
+            </div>
+          </div>
+
+
+
           <keep-alive>
             <router-view v-if="this.$route.meta.keepAlive"></router-view>
           </keep-alive>
