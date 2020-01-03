@@ -123,7 +123,14 @@
             </div></el-col>
             <el-col :span="6"><div>
               <el-form-item label="损坏类型">
-                <el-input v-model="rdt.damage_type"></el-input>
+                <el-select v-model="rdt.damage_type" placeholder="请选择">
+                  <el-option
+                    v-for="item in damage_type"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
               </el-form-item>
             </div></el-col>
           </el-row>
@@ -180,7 +187,47 @@
           d_lenth: [{required: true, message: '非空值', trigger: 'blur' }],
           d_width: [{required: true, message: '非空值', trigger: 'blur' }],
           d_height: [{required: true, message: '非空值', trigger: 'blur' }]
-        }
+        },
+        damage_type: [{
+          value: '线裂',
+          label: '线裂'
+        }, {
+          value: '网裂',
+          label: '网裂'
+        }, {
+          value: '龟裂',
+          label: '龟裂'
+        }, {
+          value: '拥包',
+          label: '拥包'
+        }, {
+          value: '车辙',
+          label: '车辙'
+        }, {
+          value: '沉陷',
+          label: '沉陷'
+        }, {
+          value: '翻浆',
+          label: '翻浆'
+        }, {
+          value: '剥落',
+          label: '剥落'
+        }, {
+          value: '坑槽',
+          label: '坑槽'
+        }, {
+          value: '啃边',
+          label: '啃边'
+        }, {
+          value: '路框差',
+          label: '路框差'
+        }, {
+          value: '唧浆',
+          label: '唧浆'
+        }, {
+          value: '泛油',
+          label: '泛油'
+        }],
       }
     },
     mounted:function () {
@@ -229,8 +276,6 @@
               this.loadingDialog = false;
               if (resp && resp.status == 200) {
                 this.loadTableData();
-                this.empRdt();
-                this.dialogVisible = false;
                 this.$message({
                   message: '添加成功',
                   type: 'success'
@@ -241,6 +286,8 @@
                 this.$message.error({message: '未知错误'});
               }
             });
+            this.empRdt();
+            this.dialogVisible = false;
           } else {
             return false;
           }
