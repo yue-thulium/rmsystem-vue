@@ -41,6 +41,8 @@ export const formatRoutes = (routes)=> {
           require(['../components/roadmanage/' + component + '.vue'],resolve)
         } else if (component.startsWith("rm")) {
           require(['../components/roadmanage/' + component + '.vue'],resolve)
+        } else if (component.startsWith("um")) {
+          require(['../components/roadmanage/' + component + '.vue'],resolve)
         }
       },
       name: name,
