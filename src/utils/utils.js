@@ -37,6 +37,10 @@ export const formatRoutes = (routes)=> {
           require(['../components/roadcheck/regularInspection/' + component + '.vue'], resolve)
         } else if (component.startsWith("st")) {
           require(['../components/roadcheck/specialTest/' + component + '.vue'], resolve)
+        } else if (component.startsWith("RoadManage")) {
+          require(['../components/roadmanage/' + component + '.vue'],resolve)
+        } else if (component.startsWith("rm")) {
+          require(['../components/roadmanage/' + component + '.vue'],resolve)
         }
       },
       name: name,

@@ -19,18 +19,10 @@
             </el-table-column>
             <el-table-column
               align="center"
-              label="检测人员"
+              label="损坏类型"
               width="180">
               <template slot-scope="scope">
-                <span>{{ scope.row.worker_name}}</span>
-              </template>
-            </el-table-column>
-            <el-table-column
-              align="center"
-              label="IRI"
-              width="180">
-              <template slot-scope="scope">
-                <span>{{ scope.row.iri}}</span>
+                <span>{{ scope.row.damage_type}}</span>
               </template>
             </el-table-column>
             <el-table-column
@@ -74,3 +66,30 @@
 
     </div>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData : [],
+      }
+    },
+    mounted:function () {
+      this.loadTableData(); //初始化数据
+    },
+    methods: {
+      loadTableData(){
+        var _this = this;
+        this.getRequest("/rc/ri/rdt").then(resp =>{
+          if (resp && resp.status == 200){
+            var data = resp.data;
+            _this.tableData = data.tabledata;
+          }
+        });
+      },
+      filterTag(value, row) {
+        return row.whether === value;
+      },
+    }
+  }
+</script>
