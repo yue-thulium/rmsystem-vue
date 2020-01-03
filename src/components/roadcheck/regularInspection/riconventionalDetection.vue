@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>常规检测</h1>
+    <h1>路面平整度检测</h1>
 
     <el-row>
       <div class="grid-content bg-purple-light">
@@ -65,7 +65,7 @@
               <el-button
                 size="mini"
                 :disabled="scope.row.addPr"
-                @click="handleEdit(scope.$index, scope.row)">巡查记录</el-button>
+                @click="handleEdit(scope.$index, scope.row)">路面平整度检测</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -91,7 +91,7 @@
           <el-input v-model="rst.IRI"></el-input>
         </el-form-item>
         <el-form-item label="备注">
-          <el-input type="textarea" v-model="rst.IRI"></el-input>
+          <el-input type="textarea" v-model="rst.remark"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button :plain="true" type="primary" @click="onSubmitC1R('addRst')" :loading="loadingDialog">确 定</el-button>
@@ -171,6 +171,8 @@
               this.loadingDialog = false;
               if (resp && resp.status == 200) {
                 this.loadTableData();
+                this.empRst();
+                this.dialogVisible = false;
                 this.$message({
                   message: '添加成功',
                   type: 'success'
@@ -181,8 +183,6 @@
                 this.$message.error({message: '未知错误'});
               }
             });
-            this.empRst();
-            this.dialogVisible = false;
           } else {
             return false;
           }

@@ -57,12 +57,94 @@
                 <el-button
                   size="mini"
                   :disabled="scope.row.addPr"
-                  @click="handleEdit(scope.$index, scope.row)">巡查记录</el-button>
+                  @click="handleEdit(scope.$index, scope.row)">路面设施损害通知单</el-button>
               </template>
             </el-table-column>
           </el-table>
         </div>
       </el-row>
+
+
+
+
+      <el-dialog
+        title="路面设施损害通知单"
+        :visible.sync="dialogVisible"
+        :destroy-on-close="true"
+        width="60%">
+        <el-form ref="addRBT" :model="rdt" label-width="80px" :rules="rules">
+
+          <el-row>
+            <el-col :span="8"><div>
+              <el-form-item label="检测人员" prop="worker_code_name">
+                <el-input v-model="rdt.worker_code_name"></el-input>
+              </el-form-item>
+            </div></el-col>
+            <el-col :span="16"><div>
+              <el-form-item label="检测日期">
+                <el-input :disabled="true" v-model="rdt.make_date"></el-input>
+              </el-form-item>
+            </div></el-col>
+          </el-row>
+
+          <el-row>
+            <el-col :span="8"><div>
+              <el-form-item label="起止位置">
+                <el-input v-model="rdt.begin_end"></el-input>
+              </el-form-item>
+            </div></el-col>
+            <el-col :span="8"><div>
+              <el-form-item label="检查总长" prop="length">
+                <el-input type="number" v-model="rdt.length"></el-input>
+              </el-form-item>
+            </div></el-col>
+            <el-col :span="8"><div>
+              <el-form-item label="检查总宽" prop="width">
+                <el-input type="number" v-model="rdt.width"></el-input>
+              </el-form-item>
+            </div></el-col>
+          </el-row>
+
+          <el-row>
+            <el-col :span="6"><div>
+              <el-form-item label="损坏长" prop="d_lenth">
+                <el-input type="number" v-model="rdt.d_lenth"></el-input>
+              </el-form-item>
+            </div></el-col>
+            <el-col :span="6"><div>
+              <el-form-item label="损坏宽" prop="d_width">
+                <el-input type="number" v-model="rdt.d_width"></el-input>
+              </el-form-item>
+            </div></el-col>
+            <el-col :span="6"><div>
+              <el-form-item label="损坏高" prop="d_height">
+                <el-input type="number" v-model="rdt.d_height"></el-input>
+              </el-form-item>
+            </div></el-col>
+            <el-col :span="6"><div>
+              <el-form-item label="损坏类型">
+                <el-input v-model="rdt.damage_type"></el-input>
+              </el-form-item>
+            </div></el-col>
+          </el-row>
+
+          <el-form-item label="损坏位置及损坏情况描述">
+            <el-input type="textarea" :rows="4" v-model="rdt.d_position_description"></el-input>
+          </el-form-item>
+          <el-form-item label="备注">
+            <el-input type="textarea" v-model="rdt.remark"></el-input>
+          </el-form-item>
+
+          <el-form-item>
+            <el-button :plain="true" type="primary" @click="onSubmitC1R('addRBT')" :loading="loadingDialog">确 定</el-button>
+            <el-button @click="dialogVisible = false">取 消</el-button>
+          </el-form-item>
+
+        </el-form>
+      </el-dialog>
+
+
+
 
     </div>
 </template>
@@ -72,6 +154,33 @@
     data() {
       return {
         tableData : [],
+        search : '',
+        table_index : undefined,
+        table_row : undefined,
+        dialogVisible : false,
+        loadingDialog : false,
+        rdt : {
+          damage_code : '',
+          worker_code_name : '',
+          make_date : '',
+          begin_end : '',
+          length : '',
+          width : '',
+          damage_type : '',
+          d_lenth : '',
+          d_width : '',
+          d_height : '',
+          d_position_description : '',
+          remark : '',
+        },
+        rules : {
+          worker_code_name : [{required: true, message: '内容不能为空', trigger: 'blur'}],
+          length: [{required: true, message: '非空值', trigger: 'blur' }],
+          width: [{required: true, message: '非空值', trigger: 'blur' }],
+          d_lenth: [{required: true, message: '非空值', trigger: 'blur' }],
+          d_width: [{required: true, message: '非空值', trigger: 'blur' }],
+          d_height: [{required: true, message: '非空值', trigger: 'blur' }]
+        }
       }
     },
     mounted:function () {
@@ -87,9 +196,72 @@
           }
         });
       },
+      formattingDate(date){
+        date= new Date(Date.parse(date));
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        var d = date.getDate();
+        return y+'-'+m+'-'+d;
+      },
       filterTag(value, row) {
         return row.whether === value;
       },
+      handleEdit(index, row) {
+        this.table_index = index;
+        this.table_row = row;
+        var MyDate = new Date();
+        this.rdt.make_date = this.formattingDate(MyDate.toLocaleDateString());
+        this.dialogVisible = true;
+      },
+      onSubmitC1R(form) {
+        this.$refs[form].validate((valid) => {
+          if (valid) {
+            this.loadingDialog = true;
+            this.rdt.make_date = new Date(this.formattingDate(this.rdt.make_date));
+            this.rdt.damage_code = this.tableData[this.table_index].damage_code;
+            this.rdt.road_name = this.tableData[this.table_index].road_name;
+            this.rdt.length = parseFloat(this.rdt.length);
+            this.rdt.width = parseFloat(this.rdt.width);
+            this.rdt.d_width = parseFloat(this.rdt.d_width);
+            this.rdt.d_lenth = parseFloat(this.rdt.d_lenth);
+            this.rdt.d_height = parseFloat(this.rdt.d_height);
+            this.postRequest('/rc/ri/updateRDT', this.rdt).then(resp=> {
+              this.loadingDialog = false;
+              if (resp && resp.status == 200) {
+                this.loadTableData();
+                this.empRdt();
+                this.dialogVisible = false;
+                this.$message({
+                  message: '添加成功',
+                  type: 'success'
+                });
+              }else if (resp && (resp.status == 504 || resp.status == 404)) {
+                this.$message.error({message: '服务器被吃了⊙﹏⊙∥'});
+              }else {
+                this.$message.error({message: '未知错误'});
+              }
+            });
+          } else {
+            return false;
+          }
+        });
+      },
+      empRdt() {
+        rdt = {
+          damage_code : '',
+            worker_code_name : '',
+            make_date : '',
+            begin_end : '',
+            length : '',
+            width : '',
+            damage_type : '',
+            d_lenth : '',
+            d_width : '',
+            d_height : '',
+            d_position_description : '',
+            remark : '',
+        }
+      }
     }
   }
 </script>
