@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>设施路面损害</h1>
+      <h1>设施路面损坏</h1>
 
       <el-row>
         <div class="grid-content bg-purple-light">

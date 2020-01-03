@@ -1,6 +1,6 @@
 <template>
   <h1>
-    设施路面损害
+   结构强度检测
   </h1>
 </template>
 
