@@ -116,8 +116,8 @@
                 </el-col>
                 <el-col :span="6">
                   <div class="grid-content bg-purple">
-                    <el-form-item label="AADT" label-width="100px">
-                      <el-input v-model="rbt.AADT"></el-input>
+                    <el-form-item label="aadt" label-width="100px">
+                      <el-input v-model="rbt.aadt"></el-input>
                     </el-form-item>
                   </div>
                 </el-col>
@@ -197,7 +197,7 @@
             manage_unite:'',
             road_begin:'',
             pavement_class:'',
-            AADT:'',
+            aadt:'',
             maintenance_unite:'',
             road_end:'',
             traffic_class:'',
