@@ -122,7 +122,7 @@
               </el-form-item>
             </div></el-col>
             <el-col :span="6"><div>
-              <el-form-item label="损坏类型">
+              <el-form-item label="损坏类型" prop="damage_type">
                 <el-select v-model="rdt.damage_type" placeholder="请选择">
                   <el-option
                     v-for="item in damage_type"
@@ -179,6 +179,7 @@
           d_height : '',
           d_position_description : '',
           remark : '',
+          d_areas : 0
         },
         rules : {
           worker_code_name : [{required: true, message: '内容不能为空', trigger: 'blur'}],
@@ -186,7 +187,8 @@
           width: [{required: true, message: '非空值', trigger: 'blur' }],
           d_lenth: [{required: true, message: '非空值', trigger: 'blur' }],
           d_width: [{required: true, message: '非空值', trigger: 'blur' }],
-          d_height: [{required: true, message: '非空值', trigger: 'blur' }]
+          d_height: [{required: true, message: '非空值', trigger: 'blur' }],
+          damage_type: [{required: true, message: '非空值', trigger: 'blur' }]
         },
         damage_type: [{
           value: '线裂',
@@ -272,6 +274,7 @@
             this.rdt.d_width = parseFloat(this.rdt.d_width);
             this.rdt.d_lenth = parseFloat(this.rdt.d_lenth);
             this.rdt.d_height = parseFloat(this.rdt.d_height);
+            this.rdt.d_areas = this.rdt.d_width * this.rdt.d_lenth;
             this.postRequest('/rc/ri/updateRDT', this.rdt).then(resp=> {
               this.loadingDialog = false;
               if (resp && resp.status == 200) {
@@ -307,6 +310,7 @@
             d_height : '',
             d_position_description : '',
             remark : '',
+            d_areas : 0
         }
       }
     }
