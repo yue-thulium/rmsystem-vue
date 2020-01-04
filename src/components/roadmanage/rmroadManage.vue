@@ -193,7 +193,7 @@
 
 
 
-    <el-form :model="rbt">
+    <el-form ref="updateRBT" :model="rbt">
       <div>
         <el-dialog
           title="道路基本信息"
@@ -311,8 +311,8 @@
             </el-col>
             <el-col :span="6">
               <div class="grid-content bg-purple">
-                <el-form-item label="AADT" label-width="100px">
-                  <el-input v-model="rbt.AADT"></el-input>
+                <el-form-item label="aadt" label-width="100px">
+                  <el-input v-model="rbt.aadt"></el-input>
                 </el-form-item>
               </div>
             </el-col>
@@ -349,7 +349,7 @@
             </el-col>
           </el-row>
           <el-form-item>
-            <el-button type="primary" @click="exitForm1()">确认修改</el-button>
+            <el-button type="primary" @click="updateRbt('updateRBT')" :loading="loadingDialog">确认修改</el-button>
             <el-button @click="exitForm1()">退出</el-button>
           </el-form-item>
         </el-dialog>
@@ -832,11 +832,12 @@
           manage_unite:'',
           road_begin:'',
           pavement_class:'',
-          AADT:'',
+          aadt:'',
           maintenance_unite:'',
           road_end:'',
           traffic_class:'',
-          build_date:''
+          build_date:'',
+          table_make_time:''
         },
         rct: {
           pavement_type: '',
@@ -1117,6 +1118,33 @@
           }
         });
       },
+      updateRbt(form) {  //修改道路基本信息表
+        this.$refs[form].validate((valid) => {
+          if (valid) {
+            this.loadingDialog = true;
+            this.rbt.road_code = this.tableData[this.table_index].road_code;
+            this.rbt.build_date = new Date(this.formattingDate(this.rbt.build_date));
+            this.rbt.table_make_time = new Date(this.formattingDate(this.rbt.table_make_time));
+            this.postRequest('/road/updateRoad', this.rbt).then(resp=> {
+              this.loadingDialog = false;
+              if (resp && resp.status == 200) {
+                this.loadTableData();
+                this.$message({
+                  message: '修改成功',
+                  type: 'success'
+                });
+              }else if (resp && (resp.status == 504 || resp.status == 404)) {
+                this.$message.error({message: '服务器被吃了⊙﹏⊙∥'});
+              }else {
+                this.$message.error({message: '未知错误'});
+              }
+            });
+            this.exitForm1();
+          } else {
+            return false;
+          }
+        });
+      },
       exitForm1(){
         this.empRbt();
         this.dialogForm1Visible=false;
@@ -1165,7 +1193,7 @@
       },
       empRbt(){
         this.rbt = {
-          road_name:'',
+            road_name:'',
             design_unite:'',
             road_width_range:'',
             town:'',
@@ -1179,7 +1207,7 @@
             manage_unite:'',
             road_begin:'',
             pavement_class:'',
-            AADT:'',
+            aadt:'',
             maintenance_unite:'',
             road_end:'',
             traffic_class:'',
