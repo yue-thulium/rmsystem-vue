@@ -77,7 +77,6 @@
     <el-dialog
       title="路面平整度记录表"
       :visible.sync="dialogVisible"
-      :destroy-on-close="true"
       width="40%">
 
       <el-form ref="addRst" :model="rst" label-width="80px" :rules="rules">
@@ -171,17 +170,19 @@
               this.loadingDialog = false;
               if (resp && resp.status == 200) {
                 this.loadTableData();
-                this.empRst();
-                this.dialogVisible = false;
                 this.$message({
                   message: '添加成功',
                   type: 'success'
                 });
+                this.dialogVisible = false;
               }else if (resp && (resp.status == 504 || resp.status == 404)) {
                 this.$message.error({message: '服务器被吃了⊙﹏⊙∥'});
+                this.dialogVisible = false;
               }else {
                 this.$message.error({message: '未知错误'});
+                this.dialogVisible = false;
               }
+              this.empRst();
             });
           } else {
             return false;
