@@ -921,6 +921,8 @@
         _this.drawer = true;
         console.log(index, row);
       },
+
+
       handleDelete(index, row) {  //删除道路预警信息
         this.table_index = index;
         this.table_row = row;
@@ -1049,6 +1051,7 @@
         this.drawer = false;
       },
       loadTableData(){
+
         var _this = this;
         this.getRequest("/rc/dp/c1r").then(resp =>{
           if (resp && resp.status == 200){
@@ -1058,6 +1061,7 @@
           }
         });
       },
+
       filterTag(value, row) {
         return row.whether === value;
       },
