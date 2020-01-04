@@ -283,14 +283,16 @@
                   message: '添加成功',
                   type: 'success'
                 });
+                this.dialogVisible = false;
               }else if (resp && (resp.status == 504 || resp.status == 404)) {
                 this.$message.error({message: '服务器被吃了⊙﹏⊙∥'});
+                this.dialogVisible = false;
               }else {
                 this.$message.error({message: '未知错误'});
+                this.dialogVisible = false;
               }
             });
             this.empRdt();
-            this.dialogVisible = false;
           } else {
             return false;
           }
