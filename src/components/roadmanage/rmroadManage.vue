@@ -76,6 +76,7 @@
                 <el-dropdown-menu slot="dropdown" align="center">
                   <el-dropdown-item><el-button
                     size="mini"
+                    type="info"
                     style="width: auto"
                     @click="handleEdit(scope.$index, scope.row)">巡查记录</el-button></el-dropdown-item>
                   <el-dropdown-item><el-button
@@ -90,176 +91,29 @@
                     @click="handleDelete(scope.$index, scope.row)">取消预警</el-button></el-dropdown-item>
                   <el-dropdown-item><el-button
                       size="mini"
+                      type="primary"
                       style="width: auto"
-                      @click="dialogForm1Visible = true">道路基本信息</el-button>
-                    <el-form :model="rbt">
-                      <el-dialog title="道路基本信息" :visible.sync="dialogForm1Visible" width="80%">
-                        <el-row :gutter="10">
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="道路名称" label-width="100px">
-                                <el-input v-model="rbt.road_name" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="设计单位" label-width="100px">
-                                <el-input v-model="rbt.design_unite" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="路幅宽度范围" label-width="100px">
-                                <el-input v-model="rbt.road_width_range"></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="所属乡镇" label-width="100px">
-                                <el-input v-model="rbt.town" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                        </el-row>
-
-                        <el-row :gutter="10">
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="道路编号" label-width="100px">
-                                <el-input v-model="rbt.road_code" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="建造单位" label-width="100px">
-                                <el-input v-model="rbt.construction_unite" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="道路长度" label-width="100px">
-                                <el-input v-model="rbt.road_length"></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="管理分类" label-width="100px">
-                                <el-input v-model="rbt.manage_sort" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                        </el-row>
-
-                        <el-row :gutter="10">
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="道路走向" label-width="100px">
-                                <el-input v-model="rbt.road_trend" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="道路等级" label-width="100px">
-                                <el-input v-model="rbt.road_class" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="道路面积" label-width="100px">
-                                <el-input v-model="rbt.road_area"></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="管理单位" label-width="100px">
-                                <el-input v-model="rbt.manage_unite" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                        </el-row>
-
-                        <el-row :gutter="10">
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="道路起点" label-width="100px">
-                                <el-input v-model="rbt.road_begin" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="路面等级" label-width="100px">
-                                <el-input v-model="rbt.pavement_class" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="AADT" label-width="100px">
-                                <el-input v-model="rbt.AADT"></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="养护单位" label-width="100px">
-                                <el-input v-model="rbt.maintenance_unite" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                        </el-row>
-
-                        <el-row :gutter="10">
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="道路终点" label-width="100px">
-                                <el-input v-model="rbt.road_end" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="设计时速" label-width="100px">
-                                <el-input v-model="rbt.road_speed" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="交通量等级" label-width="100px">
-                                <el-input v-model="rbt.traffic_class"></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                          <el-col :span="6">
-                            <div class="grid-content bg-purple">
-                              <el-form-item label="建造年月" label-width="100px">
-                                <el-input v-model="rbt.build_date" ></el-input>
-                              </el-form-item>
-                            </div>
-                          </el-col>
-                        </el-row>
-                      </el-dialog>
-                    </el-form>
-                    <div slot="footer" class="dialog-footer">
-                      <el-button @click="dialogForm1Visible = false">取 消</el-button>
-                      <el-button type="primary" @click="dialogForm1Visible = false">确 定</el-button>
-                    </div>
-
-                  </el-dropdown-item>
+                      @click="rbtshow(scope.$index, scope.row)">道路基本信息</el-button></el-dropdown-item>
                   <el-dropdown-item><el-button
                     size="mini"
+                    type="info"
                     style="width: auto"
-                    @click="handleAdd(scope.$index, scope.row)">附加按钮2</el-button></el-dropdown-item>
+                    @click="rctshow(scope.$index, scope.row)">车行道</el-button></el-dropdown-item>
+                  <el-dropdown-item><el-button
+                    size="mini"
+                    type="success"
+                    style="width: auto"
+                    @click="sidewalk_tableshow(scope.$index, scope.row)">人行道</el-button></el-dropdown-item>
+                  <el-dropdown-item><el-button
+                    size="mini"
+                    type="warning"
+                    style="width: auto"
+                    @click="divider_band_tableshow(scope.$index, scope.row)">分隔带</el-button></el-dropdown-item>
+                  <el-dropdown-item><el-button
+                    type="primary"
+                    size="mini"
+                    style="width: auto"
+                    @click="facilities_tableshow(scope.$index, scope.row)">附属设施</el-button></el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </template>
@@ -339,6 +193,553 @@
 
 
 
+    <el-form :model="rbt">
+      <div>
+        <el-dialog
+          title="道路基本信息"
+          :visible.sync="dialogForm1Visible"
+          width="80%"
+          :close-on-click-modal="false"
+          :destroy-on-close = 'true'>
+          <el-row :gutter="10">
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="道路名称" label-width="100px">
+                  <el-input v-model="rbt.road_name" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="设计单位" label-width="100px">
+                  <el-input v-model="rbt.design_unite" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="路幅宽度范围" label-width="100px">
+                  <el-input v-model="rbt.road_width_range"></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="所属乡镇" label-width="100px">
+                  <el-input v-model="rbt.town" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="10">
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="道路编号" label-width="100px">
+                  <el-input v-model="rbt.road_code" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="建造单位" label-width="100px">
+                  <el-input v-model="rbt.construction_unite" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="道路长度" label-width="100px">
+                  <el-input v-model="rbt.road_length"></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="管理分类" label-width="100px">
+                  <el-input v-model="rbt.manage_sort" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="10">
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="道路走向" label-width="100px">
+                  <el-input v-model="rbt.road_trend" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="道路等级" label-width="100px">
+                  <el-input v-model="rbt.road_class" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="道路面积" label-width="100px">
+                  <el-input v-model="rbt.road_area"></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="管理单位" label-width="100px">
+                  <el-input v-model="rbt.manage_unite" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="10">
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="道路起点" label-width="100px">
+                  <el-input v-model="rbt.road_begin" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="路面等级" label-width="100px">
+                  <el-input v-model="rbt.pavement_class" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="AADT" label-width="100px">
+                  <el-input v-model="rbt.AADT"></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="养护单位" label-width="100px">
+                  <el-input v-model="rbt.maintenance_unite" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="10">
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="道路终点" label-width="100px">
+                  <el-input v-model="rbt.road_end" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="交通量等级" label-width="100px">
+                  <el-input v-model="rbt.traffic_class"></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content bg-purple">
+                <el-form-item label="建造年月" label-width="100px">
+                  <el-input v-model="rbt.build_date" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+          <el-form-item>
+            <el-button type="primary" @click="exitForm1()">确认修改</el-button>
+            <el-button @click="exitForm1()">退出</el-button>
+          </el-form-item>
+        </el-dialog>
+      </div>
+    </el-form>
+
+
+
+
+    <el-form :model="rct">
+      <div>
+      <el-dialog
+        title="车行道"
+        :visible.sync="dialogForm2Visible"
+        width="60%"
+        :close-on-click-modal="false"
+        :destroy-on-close = 'true'>
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="路面基层类型" label-width="140px">
+                <el-input v-model="rct.grassroots_type" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="路面基层厚度" label-width="140px">
+                <el-input v-model="rct.grassroots_thickness"></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="路面类型" label-width="140px">
+                <el-input v-model="rct.pavement_type" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="路面厚度" label-width="140px">
+                <el-input v-model="rct.pavement_thickness"></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="车道数" label-width="140px">
+                <el-input v-model="rct.lanes" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="通行方向" label-width="140px">
+                <el-input v-model="rct.direction" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="左侧非机动车道宽度范围" label-width="140px">
+                <el-input v-model="rct.l_m_w_r" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="右侧非机动车道宽度范围" label-width="140px">
+                <el-input v-model="rct.r_m_w_r" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="车行道面积" label-width="140px">
+                <el-input v-model="rct.lane_areas" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="有无公交车专用道" label-width="140px">
+                <el-input v-model="rct.name" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="侧石类型" label-width="140px">
+                <el-input v-model="rct.lateral_rock_type" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="侧石长度" label-width="140px">
+                <el-input v-model="rct.lateral_rock_length" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="平石类型" label-width="140px">
+                <el-input v-model="rct.flat_rock_type" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="平石长度" label-width="140px">
+                <el-input v-model="rct.flat_rock_length" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="机动车道宽度范围" label-width="140px">
+                <el-input v-model="rct.motorway_width_range"></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+        <el-form-item>
+          <el-button type="primary" @click="exitForm2()">确认修改</el-button>
+          <el-button @click="exitForm2()">退出</el-button>
+        </el-form-item>
+      </el-dialog>
+      </div>
+    </el-form>
+
+
+
+    <el-form :model="sidewalk_table">
+      <div>
+      <el-dialog
+        title="人行道"
+        :visible.sync="dialogForm3Visible"
+        width="60%"
+        :close-on-click-modal="false"
+        :destroy-on-close = 'true'>
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <el-form-item label="铺面类型" label-width="140px">
+                  <el-input v-model="sidewalk_table.pavement_type" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <el-form-item label="人行道长度" label-width="140px">
+                  <el-input v-model="sidewalk_table.sidewalk_length"></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+
+
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <el-form-item label="人行道宽度范围" label-width="140px">
+                  <el-input v-model="sidewalk_table.sidewalk_width_range" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <el-form-item label="直线面积" label-width="140px">
+                  <el-input v-model="sidewalk_table.sidewalk_areas"></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <el-form-item label="交叉口面积" label-width="140px">
+                  <el-input v-model="sidewalk_table.intersection_areas" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <el-form-item label="盲道长度" label-width="140px">
+                  <el-input v-model="sidewalk_table.blind_length" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <el-form-item label="无障碍宽度面积" label-width="140px">
+                  <el-input v-model="sidewalk_table.accessibility_areas" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <el-form-item label="绿化带面积" label-width="140px">
+                  <el-input v-model="sidewalk_table.greenbelt_areas" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="10">
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <el-form-item label="侧石类型" label-width="140px">
+                  <el-input v-model="sidewalk_table.lateral_rock_type" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="grid-content bg-purple">
+                <el-form-item label="平石类型" label-width="140px">
+                  <el-input v-model="sidewalk_table.flat_rock_areas" ></el-input>
+                </el-form-item>
+              </div>
+            </el-col>
+          </el-row>
+        <el-form-item>
+          <el-button type="primary" @click="exitForm3()">确认修改</el-button>
+          <el-button @click="exitForm3()">退出</el-button>
+        </el-form-item>
+        </el-dialog>
+      </div>
+    </el-form>
+
+
+
+
+    <el-form :model="divider_band_table">
+      <div>
+      <el-dialog
+        title="分隔带"
+        :visible.sync="dialogForm4Visible"
+        width="60%"
+        :close-on-click-modal="false"
+        :destroy-on-close = 'true'>
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="分隔带类型" label-width="140px">
+                <el-input v-model="divider_band_table.divider_type" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="长度" label-width="140px">
+                <el-input v-model="divider_band_table.length" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="宽度" label-width="140px">
+                <el-input v-model="divider_band_table.width"></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="高度" label-width="140px">
+                <el-input v-model="divider_band_table.height" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="面积" label-width="140px">
+                <el-input v-model="divider_band_table.areas" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+        <el-form-item>
+          <el-button type="primary" @click="exitForm4()">确认修改</el-button>
+          <el-button @click="exitForm4()">退出</el-button>
+        </el-form-item>
+      </el-dialog>
+      </div>
+    </el-form>
+
+
+
+
+    <el-form :model="facilities_table">
+      <div>
+      <el-dialog
+        title="附属设施"
+        :visible.sync="dialogForm5Visible"
+        width="60%"
+        :close-on-click-modal="false"
+        :destroy-on-close = 'true'>
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="检查井口数量" label-width="140px">
+                <el-input v-model="facilities_table.well_amount" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="雨水口数量" label-width="140px">
+                <el-input v-model="facilities_table.inlets_amount"></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="路名牌数量" label-width="140px">
+                <el-input v-model="facilities_table.nameplates_amount" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="标致牌数量" label-width="140px">
+                <el-input v-model="facilities_table.signboards_amount" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="树池面积" label-width="140px">
+                <el-input v-model="facilities_table.treepool_area" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="grid-content bg-purple">
+              <el-form-item label="其他" label-width="140px">
+                <el-input v-model="facilities_table.other" ></el-input>
+              </el-form-item>
+            </div>
+          </el-col>
+        </el-row>
+        <el-form-item>
+          <el-button type="primary" @click="exitForm5()">确认修改</el-button>
+          <el-button @click="exitForm5()">退出</el-button>
+        </el-form-item>
+      </el-dialog>
+      </div>
+    </el-form>
+
+
+
+
 
 
     <el-drawer :visible.sync="drawer"
@@ -393,10 +794,15 @@
         tableData: [],
         d_type : [],
         search: '',
+        road_code : '',
         table_index: undefined,
         table_row: undefined,
         dialogTableVisible: false,
         dialogForm1Visible: false,
+        dialogForm2Visible: false,
+        dialogForm3Visible: false,
+        dialogForm4Visible: false,
+        dialogForm5Visible: false,
         drawer: false,
         dfn: {
           road_code: '',
@@ -429,9 +835,51 @@
           AADT:'',
           maintenance_unite:'',
           road_end:'',
-          road_speed:'',
           traffic_class:'',
           build_date:''
+        },
+        rct: {
+          pavement_type: '',
+          pavement_thickness: '',
+          grassroots_thickness: '',
+          grassroots_type: '',
+          lanes: '',
+          direction: '',
+          motorway_width_range: '',
+          r_m_w_r: '',
+          l_m_w_r: '',
+          lane_areas: '',
+          lateral_rock_type: '',
+          lateral_rock_length: '',
+          flat_rock_type: '',
+          flat_rock_length: ''
+        },
+        sidewalk_table: {
+          pavement_type: '',
+          sidewalk_length: '',
+          sidewalk_width_range: '',
+          sidewalk_areas: '',
+          intersection_areas: '',
+          blind_length: '',
+          accessibility_areas: '',
+          greenbelt_areas: '',
+          lateral_rock_type: '',
+          flat_rock_areas: ''
+        },
+        divider_band_table: {
+          divider_type: '',
+          length: '',
+          width: '',
+          height: '',
+          areas: ''
+        },
+        facilities_table: {
+          inlets_amount: '',
+          well_amount: '',
+          nameplates_amount: '',
+          signboards_amount: '',
+          treepool_area: '',
+          other: ''
         },
         loadingDialog: false,
         loadingDraw: false,
@@ -514,6 +962,86 @@
         this.dfn.notice_code = parseInt((MyDate.getFullYear()%1000) + "" + (MyDate.getMonth()+1) + "" +  MyDate.getDate() + "" + MyDate.getHours() + "" + MyDate.getMinutes());
         this.dialogTableVisible = true;
       },
+      rbtshow(index, row){
+        console.log(index, row);
+        this.table_index = index;
+        this.table_row = row;
+        var _this = this;
+
+        this.postRequest("/road/getRBTbyroad" ,{
+            "road_code" : this.table_row.road_code
+        }).then(resp =>{
+          if (resp && resp.status == 200){
+            var data = resp.data;
+            _this.rbt = data.tabledata[0];
+          }
+        });
+        this.dialogForm1Visible = true;
+      },
+      rctshow(index, row){
+        console.log(index, row);
+        this.table_index = index;
+        this.table_row = row;
+        var _this = this;
+
+        this.postRequest("/road/getRoad_car" ,{
+          "road_code" : this.table_row.road_code
+        }).then(resp =>{
+          if (resp && resp.status == 200){
+            var data = resp.data;
+            _this.rct = data.tabledata[0];
+          }
+        });
+        this.dialogForm2Visible = true;
+      },
+      sidewalk_tableshow(index, row){
+        console.log(index, row);
+        this.table_index = index;
+        this.table_row = row;
+        var _this = this;
+
+        this.postRequest("/road/getRoad_sidewalk" ,{
+          "road_code" : this.table_row.road_code
+        }).then(resp =>{
+          if (resp && resp.status == 200){
+            var data = resp.data;
+            _this.sidewalk_table = data.tabledata[0];
+          }
+        });
+        this.dialogForm3Visible = true;
+      },
+      divider_band_tableshow(index, row){
+        console.log(index, row);
+        this.table_index = index;
+        this.table_row = row;
+        var _this = this;
+
+        this.postRequest("/road/getRoad_divider" ,{
+          "road_code" : this.table_row.road_code
+        }).then(resp =>{
+          if (resp && resp.status == 200){
+            var data = resp.data;
+            _this.divider_band_table = data.tabledata[0];
+          }
+        });
+        this.dialogForm4Visible = true;
+      },
+      facilities_tableshow(index, row){
+        console.log(index, row);
+        this.table_index = index;
+        this.table_row = row;
+        var _this = this;
+
+        this.postRequest("/road/getRoad_faclities" ,{
+          "road_code" : this.table_row.road_code
+        }).then(resp =>{
+          if (resp && resp.status == 200){
+            var data = resp.data;
+            _this.facilities_table = data.tabledata[0];
+          }
+        });
+        this.dialogForm5Visible = true;
+      },
       cl(){
         this.dialogTableVisible = false;
       },
@@ -589,6 +1117,26 @@
           }
         });
       },
+      exitForm1(){
+        this.empRbt();
+        this.dialogForm1Visible=false;
+      },
+      exitForm2(){
+        this.empRct();
+        this.dialogForm2Visible=false;
+      },
+      exitForm3(){
+        this.empSidewalk_table();
+        this.dialogForm3Visible=false;
+      },
+      exitForm4(){
+        this.empDivider_band_table();
+        this.dialogForm4Visible=false;
+      },
+      exitForm5(){
+        this.empFacilities_table();
+        this.dialogForm5Visible=false;
+      },
       empDfn() {
         this.dfn = {
           road_code: '',
@@ -613,6 +1161,80 @@
           d_position_description: '',
           remark: '',
           manage_unite: ''
+        }
+      },
+      empRbt(){
+        this.rbt = {
+          road_name:'',
+            design_unite:'',
+            road_width_range:'',
+            town:'',
+            road_code:'',
+            construction_unite:'',
+            road_length:'',
+            manage_sort:'',
+            road_trend:'',
+            road_class:'',
+            road_area:'',
+            manage_unite:'',
+            road_begin:'',
+            pavement_class:'',
+            AADT:'',
+            maintenance_unite:'',
+            road_end:'',
+            traffic_class:'',
+            build_date:''
+        }
+      },
+      empRct(){
+        this.rct = {
+          pavement_type: '',
+          pavement_thickness: '',
+          grassroots_thickness: '',
+          grassroots_type: '',
+          lanes: '',
+          direction: '',
+          motorway_width_range: '',
+          r_m_w_r: '',
+          l_m_w_r: '',
+          lane_areas: '',
+          lateral_rock_type: '',
+          lateral_rock_length: '',
+          flat_rock_type: '',
+          flat_rock_length: ''
+        }
+      },
+      empSidewalk_table(){
+        this.sidewalk_table = {
+            pavement_type: '',
+            sidewalk_length: '',
+            sidewalk_width_range: '',
+            sidewalk_areas: '',
+            intersection_areas: '',
+            blind_length: '',
+            accessibility_areas: '',
+            greenbelt_areas: '',
+            lateral_rock_type: '',
+            flat_rock_areas: ''
+        }
+      },
+      empDivider_band_table(){
+        this.divider_band_table = {
+            divider_type: '',
+            length: '',
+            width: '',
+            height: '',
+            areas: ''
+        }
+      },
+      empFacilities_table(){
+        this.facilities_table = {
+            inlets_amount: '',
+            well_amount: '',
+            nameplates_amount: '',
+            signboards_amount: '',
+            treepool_area: '',
+            other: ''
         }
       },
       formattingDate(date){
